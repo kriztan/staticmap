@@ -35,9 +35,9 @@ Class staticMapLite
     protected $maxHeight = 500;
 
     protected $tileSize = 256;
-    protected $tileSrcUrl = array('mapnik' => 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png',
-        'osmarenderer' => 'https://otile1.mqcdn.com/tiles/1.0.0/osm/{Z}/{X}/{Y}.png',
-        'cycle' => 'http://a.tile.opencyclemap.org/cycle/{Z}/{X}/{Y}.png',
+    protected $tileSrcUrl = array('mapnik' => 'https://a.tile.openstreetmap.org/{Z}/{X}/{Y}.png',
+        													'osmarenderer' => 'https://otile1.mqcdn.com/tiles/1.0.0/osm/{Z}/{X}/{Y}.png',
+        													'cycle' => 'https://a.tile.opencyclemap.org/cycle/{Z}/{X}/{Y}.png',
     );
 
     protected $tileDefaultSrc = 'mapnik';
@@ -265,7 +265,7 @@ Class staticMapLite
 
     public function tileUrlToFilename($url)
     {
-        return $this->tileCacheBaseDir . "/" . str_replace(array('http://'), '', $url);
+        return $this->tileCacheBaseDir . "/" . str_replace(array('http://','https://'), '', $url);
     }
 
     public function checkTileCache($url)
