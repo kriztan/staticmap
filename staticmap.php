@@ -57,8 +57,8 @@ Class staticMapLite
     protected $useTileCache = true;
     protected $tileCacheBaseDir = 'cache/tiles';
 
-    protected $useMapCache = false;
-    protected $mapCacheBaseDir = '.cache/maps';
+    protected $useMapCache = true;
+    protected $mapCacheBaseDir = 'cache/maps';
     protected $mapCacheID = '';
     protected $mapCacheFile = '';
     protected $mapCacheExtension = 'png';
