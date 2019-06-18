@@ -35,6 +35,10 @@ Class staticMapLite
     protected $maxHeight = 500;
 
     protected $tileSize = 256;
+    protected $mapnikurl = array('https://a.tile.openstreetmap.org/{Z}/{X}/{Y}.png',
+    														 'https://b.tile.openstreetmap.org/{Z}/{X}/{Y}.png',
+    														 'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png',
+    														 );
     protected $tileSrcUrl = array('mapnik' => 'https://a.tile.openstreetmap.org/{Z}/{X}/{Y}.png',
         													'osmarenderer' => 'https://otile1.mqcdn.com/tiles/1.0.0/osm/{Z}/{X}/{Y}.png',
         													'cycle' => 'https://a.tile.opencyclemap.org/cycle/{Z}/{X}/{Y}.png',
@@ -315,7 +319,11 @@ Class staticMapLite
         if ($this->useTileCache && ($cached = $this->checkTileCache($url))) return $cached;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0");
+        if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+        	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+        } else {
+        	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+      	}
         curl_setopt($ch, CURLOPT_URL, $url);
         $tile = curl_exec($ch);
         curl_close($ch);
